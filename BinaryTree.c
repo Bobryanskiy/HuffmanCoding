@@ -1,8 +1,7 @@
 #include "BinaryTree.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-NODE **findLast(NODE *root, int* size) {
+NODE **findLast(NODE *root, int *size) {
     *size += 1;
     if (root->left == NULL) {    
         return &root->left;
@@ -23,36 +22,28 @@ NODE **findLast(NODE *root, int* size) {
     }
 }
 
-int nodeCount(NODE *node) {
-    if (node->left == NULL && node->right == NULL)
-        return 1;
-    int left, right;
-    if (node->left != NULL)
-        left = nodeCount(node->left);
-    else
-        left = 0;
-    if (node->right != NULL)
-        right = nodeCount(node->right); 
-    else 
-        right = 0;
-    return left + right + 1;
+int nodeCount(NODE *root) {
+    if (root == NULL)
+    return (0);
+  return (1 + nodeCount(root->left) + nodeCount(root->right));
 }
 
-NODE *createNode(int value) {
+NODE *createNode(int value, char ch) {
     NODE* node = malloc(sizeof(NODE));
     node->left = node->right = NULL;
-    node->number = value;
+    node->weight = value;
+    node->ch = ch;
     return node;
 }
 
-NODE *createBinaryTree(NODE *root, int val) {
-    root = createNode(val);
+NODE *createBinaryTree(int val, char ch) {
+    NODE* root = createNode(val, ch);
     return root;
 }
 
-NODE *addToTree(NODE *root, int value) {
+NODE *addToTree(NODE *root, int value, char ch) {
     int size = 0;
-    *findLast(root, &size) = createNode(value);
+    *findLast(root, &size) = createNode(value, ch);
     return 0; 
 }
 
@@ -62,13 +53,14 @@ NODE *deleteFromTree(NODE *root, int value) {
 
 NODE *findByIndex(NODE *root, int** arr, int index) {
     if (root->right) {
-        (*arr)[(index + 1) * 2] = root->right->number;
+        (*arr)[(index + 1) * 2] = root->right->weight;
         findByIndex(root->right, arr, (index + 1) * 2);
     }
     if (root->left) {
-        (*arr)[index * 2 + 1] = root->left->number;
+        (*arr)[index * 2 + 1] = root->left->weight;
         findByIndex(root->left, arr, index * 2 + 1);
     }
+    return root;
 }
 
 int *arrayFromTree(NODE *root, int *size) {
@@ -76,18 +68,15 @@ int *arrayFromTree(NODE *root, int *size) {
     int treeSize = nodeCount(root);
     *size = treeSize;
     int* arr = malloc(sizeof(int) * treeSize);
-    arr[0] = root->number;
+    arr[0] = root->weight;
     findByIndex(root, &arr, 0);
-    for (int i = 0; i < treeSize; ++i) printf("%d ", arr[i]);
-    printf("\n");
     return 0;
 }
 
-NODE *treeFromArray(int* array, int size) {
-    NODE* root = malloc(sizeof(NODE));
-    root = createBinaryTree(root, array[0]);
+NODE *treeFromArray(int* array, int size, char *chars) {
+    NODE* root = createBinaryTree(array[0], chars[0]);
     for (int i = 1; i < size; ++i) {
-        addToTree(root, array[i]);
+        addToTree(root, array[i], chars[i]);
     }
     return root;
 }

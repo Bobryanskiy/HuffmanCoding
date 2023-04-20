@@ -9,6 +9,7 @@
                 "-g",
                 "${file}",
                 "BinaryTree.c",
+                "PriorityQueue.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
