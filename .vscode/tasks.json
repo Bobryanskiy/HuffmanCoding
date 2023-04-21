@@ -8,10 +8,12 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "BinaryTree.c",
-                "PriorityQueue.c",
+                "headers/BinaryTree/BinaryTree.c",
+                "headers/PriorityQueue/PriorityQueue.c",
+                "headers/HuffmanTable/HuffmanTable.c",
+                "headers/Huffman/Huffman.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -1,4 +1,5 @@
 #include "BinaryTree.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 NODE **findLast(NODE *root, int *size) {
@@ -79,4 +80,25 @@ NODE *treeFromArray(int* array, int size, char *chars) {
         addToTree(root, array[i], chars[i]);
     }
     return root;
+}
+
+void print_on_left_side(const NODE* root, int level)
+{
+	if (root)
+	{
+		print_on_left_side(root->right, level + 1);
+		for (int i = 0; i < level; ++i)
+			printf("\t");
+		printf("%d-%c\n", root->weight, root->ch);
+		print_on_left_side(root->left, level + 1);
+	}
+}
+
+NODE* uniteTwoTrees(NODE* tree1, NODE* tree2) {
+    NODE* newRoot = malloc(sizeof(NODE));
+    newRoot->left = tree1;
+    newRoot->right = tree2;
+    if (tree1 != NULL) newRoot->weight += tree1->weight;
+    if (tree2 != NULL) newRoot->weight += tree2->weight;
+    return newRoot;
 }

@@ -11,3 +11,5 @@ NODE* addToTree(NODE* root, int value, char ch);
 NODE* deleteFromTree(NODE* root, int value);
 int* arrayFromTree(NODE* root, int* size);
 NODE* treeFromArray(int* array, int size, char* chars);
+void print_on_left_side(const NODE* root, int level);
+NODE* uniteTwoTrees(NODE* tree1, NODE* tree2);
