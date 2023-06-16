@@ -37,7 +37,7 @@ int *addToQueue(QUEUE *queue, NODE* treee) {
     if (queue->maxSize <= queue->size + 1) {
         NODE** temp = queue->tree;
         queue->tree = malloc(sizeof(NODE) * queue->maxSize * 2 + 1);
-        queue->maxSize *= 2 + 1;
+        queue->maxSize = queue->maxSize * 2 + 1;
         for (int i = 0; i < queue->size; ++i) {
             queue->tree[i] = temp[i];
         }
