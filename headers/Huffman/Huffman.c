@@ -3,11 +3,12 @@
 #include <string.h>
 #include "../HuffmanTable/HuffmanTable.h"
 
-FILE* encode(TABLELIST* table, FILE* file, char* fileName) {
-    FILE* encoded = fopen(strcat(fileName, "enc.txt"), "w+b");
+FILE* encode(int* chars, TABLELIST* table, FILE* file, char* fileName) {
+    FILE* encoded = fopen(strcat(fileName, "enc"), "w+b");
     rewind(file);
     char c;
     TABLENODE* node = table->first;
+    int d = 0;
     do {
         // записать таблицу в файл (пока не знаю как) (что именно, частоту или код или что-то ещё)
         // я не знаю, как показывать, что последний байт незаконченный, поэтому записываем
@@ -16,7 +17,8 @@ FILE* encode(TABLELIST* table, FILE* file, char* fileName) {
         // а если несколько байт кол-во, то как тогда понимать где что... значит построчно надо записывать..
 
         // записываем кол-во букв, на каждой строчке символ и кол-во его использований
-
+        fprintf(encoded, "%c%d\n", node->letter, chars[node->letter]);
+        ++d;
     } while((node = node->next) != NULL);
     node = table->first;
     char byte[8] = { 0 };
@@ -46,5 +48,6 @@ FILE* encode(TABLELIST* table, FILE* file, char* fileName) {
         // byte[curLen] = '2';
         writeByte(encoded, byte);
     }
+    fprintf(encoded, "%d", d);
     return encoded;
 }

@@ -43,18 +43,97 @@ int main() {
             addToQueue(queue, uniteTwoTrees(deleteFromQueue(queue, 0), deleteFromQueue(queue, 0)));
         }
         TABLELIST* table = buildTable(queue->tree[0]);
-        encode(table, file, fileName);
+        encode(chars, table, file, fileName);
     } else if (!strcmp(command, "decode")) {
+        FILE* decoded = fopen(strcat(fileName, "dec"), "w+b");
         char c;
         BYTETOBIT byte;
-        fseek(file, 0L, SEEK_END);
+        fseek(file, -1L, SEEK_END);
+        int size;
+        fscanf(file, "%d", &size);
+        // printf("%d\n", size);
         long length = ftell(file);
         fseek(file, 0, SEEK_SET);
-        for (int i = 0; i < length; ++i) {
+        char* chars = malloc(sizeof(char) * size);
+        int* charss = malloc(sizeof(int) * size);
+        for (int i = 0; i < size; ++i) {
+            fscanf(file, "%c%d", &chars[i], &charss[i]);
+            fseek(file, 1L, SEEK_CUR);
+        }
+        QUEUE* queue = initQueue(size, 0);
+        
+        int mxc = 0;
+        for (int i = 0; i < size; ++i) {
+            NODE* node = createBinaryTree(charss[i], chars[i]);
+            addToQueue(queue, node);
+            mxc += charss[i];
+        }
+        while (queue->size - 1) {
+            addToQueue(queue, uniteTwoTrees(deleteFromQueue(queue, 0), deleteFromQueue(queue, 0)));
+        }
+        int count = 0;
+        for (int i = 0; i < length - size * 3 - 1; ++i) {
             c = getc(file);
             byte.byte = c;
             printf("%c - ", c);
             printf("%c%c%c%c%c%c%c%c\n", byte.bits.b0 + '0', byte.bits.b1 + '0', byte.bits.b2 + '0', byte.bits.b3 + '0', byte.bits.b4 + '0', byte.bits.b5 + '0', byte.bits.b6 + '0', byte.bits.b7 + '0');
+            NODE* node = queue->tree[0];
+            node = byte.bits.b0 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b1 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b2 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b3 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b4 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b5 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b6 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
+            node = byte.bits.b7 ? node->right : node->left;
+            if (node->ch) {
+                fprintf(decoded, "%c", node->ch);
+                node = queue->tree[0];
+                count++;
+            }
+            if (count >= mxc) break;
         }
     } else {
         printf("Wrong command - encode/decode \"{file name}\"\n");
