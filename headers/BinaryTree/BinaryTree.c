@@ -96,6 +96,7 @@ void print_on_left_side(const NODE* root, int level)
 
 NODE* uniteTwoTrees(NODE* tree1, NODE* tree2) {
     NODE* newRoot = malloc(sizeof(NODE));
+    newRoot->ch = -1;
     newRoot->left = tree1;
     newRoot->right = tree2;
     if (tree1 != NULL) newRoot->weight += tree1->weight;

@@ -79,56 +79,56 @@ int main() {
             printf("%c%c%c%c%c%c%c%c\n", byte.bits.b0 + '0', byte.bits.b1 + '0', byte.bits.b2 + '0', byte.bits.b3 + '0', byte.bits.b4 + '0', byte.bits.b5 + '0', byte.bits.b6 + '0', byte.bits.b7 + '0');
             NODE* node = queue->tree[0];
             node = byte.bits.b0 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b1 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b2 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b3 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b4 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b5 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b6 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
             }
             if (count >= mxc) break;
             node = byte.bits.b7 ? node->right : node->left;
-            if (node->ch) {
+            if (node->ch != -1) {
                 fprintf(decoded, "%c", node->ch);
                 node = queue->tree[0];
                 count++;
