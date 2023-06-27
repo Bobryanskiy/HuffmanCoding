@@ -63,7 +63,7 @@ FILE* encode(FILE* file, char* fileName) {
             }
             convert(encoded, count);
             int temp = chars[i];
-            for (int j = 0; j <= chars[i] / 256; ++j) {
+            for (int j = 0; j < count; ++j) {
                 char code[8] = { 0 };
                 int index = 0;
                 while(temp != 0 && index < 8) {
@@ -182,14 +182,14 @@ FILE* decode(FILE* file, char* fileName) {
         charss[i] = 0;
         for (int j = 0; j < n; ++j) {
             byte.byte = (unsigned char) fgetc(file);
-            charss[i] += j > 0 ? power(256, j) * 128 * byte.bits.b7 : 128 * byte.bits.b7;
-            charss[i] += j > 0 ? power(256, j) * 64 * byte.bits.b6 : 64 * byte.bits.b6;
-            charss[i] += j > 0 ? power(256, j) * 32 * byte.bits.b5 : 32 * byte.bits.b5;
-            charss[i] += j > 0 ? power(256, j) * 16 * byte.bits.b4 : 16 * byte.bits.b4;
-            charss[i] += j > 0 ? power(256, j) * 8 * byte.bits.b3 : 8 * byte.bits.b3;
-            charss[i] += j > 0 ? power(256, j) * 4 * byte.bits.b2 : 4 * byte.bits.b2;
-            charss[i] += j > 0 ? power(256, j) * 2 * byte.bits.b1 : 2 * byte.bits.b1;
-            charss[i] += j > 0 ? power(256, j) * byte.bits.b0 : 1 * byte.bits.b0;
+            charss[i] += power(2, j * 8 + 7) * byte.bits.b7;
+            charss[i] += power(2, j * 8 + 6) * byte.bits.b6;
+            charss[i] += power(2, j * 8 + 5) * byte.bits.b5;
+            charss[i] += power(2, j * 8 + 4) * byte.bits.b4;
+            charss[i] += power(2, j * 8 + 3) * byte.bits.b3;
+            charss[i] += power(2, j * 8 + 2) * byte.bits.b2;
+            charss[i] += power(2, j * 8 + 1) * byte.bits.b1;
+            charss[i] += power(2, j * 8 + 0) * byte.bits.b0;
         }
         // fseek(file, 1L, SEEK_CUR);
     }
