@@ -4,7 +4,7 @@
 
 typedef struct tableNode {
     char* code;
-    char letter;
+    unsigned char letter;
     struct tableNode* next;
 }TABLENODE;
 
@@ -14,7 +14,7 @@ typedef struct tableList {
 }TABLELIST;
 
 typedef union byteToBit {
-    unsigned char byte;
+    char byte;
     struct bits {
         unsigned b0 : 1;
         unsigned b1 : 1;

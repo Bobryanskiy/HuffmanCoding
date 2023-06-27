@@ -3,6 +3,7 @@
 typedef struct Node {
     int weight;
     char ch;
+    int isLeaf;
     struct Node* left, *right;
 }NODE;
 

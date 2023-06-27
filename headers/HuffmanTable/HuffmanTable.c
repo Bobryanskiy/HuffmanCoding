@@ -44,14 +44,15 @@ void writeByte(FILE* out, char* code) {
     // byte.bits.b5 = (code[5] == '1') ? 1 : 0;
     // byte.bits.b6 = (code[6] == '1') ? 1 : 0;
     // byte.bits.b7 = (code[7] == '1') ? 1 : 0;
-    byte.bits.b0 = code[0] + '0';
-    byte.bits.b1 = code[1] + '0';
-    byte.bits.b2 = code[2] + '0';
-    byte.bits.b3 = code[3] + '0';
-    byte.bits.b4 = code[4] + '0';
-    byte.bits.b5 = code[5] + '0';
-    byte.bits.b6 = code[6] + '0';
-    byte.bits.b7 = code[7] + '0';
+    byte.bits.b0 = code[7] + '0';
+    byte.bits.b1 = code[6] + '0';
+    byte.bits.b2 = code[5] + '0';
+    byte.bits.b3 = code[4] + '0';
+    byte.bits.b4 = code[3] + '0';
+    byte.bits.b5 = code[2] + '0';
+    byte.bits.b6 = code[1] + '0';
+    byte.bits.b7 = code[0] + '0';
+    // printf("%s", code);
     fwrite(&byte, sizeof(char), 1, out);
 }
 
