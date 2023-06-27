@@ -1,4 +1,5 @@
 #pragma once
 #include "../HuffmanTable/HuffmanTable.h"
 
-FILE* encode(int* chars, TABLELIST* table, FILE* file, char* fileName);
+FILE* encode(FILE* file, char* fileName);
+FILE* decode(FILE* file, char* fileName);

@@ -4,7 +4,8 @@
         "string.h": "c",
         "binarytree.h": "c",
         "priorityqueue.h": "c",
-        "huffman.h": "c"
+        "huffman.h": "c",
+        "new": "c"
     },
     "cmake.sourceDirectory": "/home/user/projects/HSE/c/HuffmanCoding"
 }
